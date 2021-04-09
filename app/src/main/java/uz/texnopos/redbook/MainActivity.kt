@@ -2,6 +2,8 @@ package uz.texnopos.redbook
 
 import android.os.Bundle
 import android.view.Menu
+import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
@@ -24,6 +26,27 @@ class MainActivity : AppCompatActivity() {
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
+        val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        navView.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.nav_home -> {
+                    Toast.makeText(this, "Home Selected", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                R.id.nav_gallery -> {
+                    Toast.makeText(this, "Gallery Selected", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                R.id.nav_slideshow -> {
+                    Toast.makeText(this, "Slideshow Selected", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
